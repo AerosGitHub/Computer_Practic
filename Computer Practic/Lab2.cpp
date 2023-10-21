@@ -11,7 +11,10 @@ struct TrailConfig {
     int ValidSeats = 0;
 };
 
-const int LineCounter(){
+int LineCounter(){
+
+    //counting line number in the txt file
+
     std::ifstream in;
     int counter = 0;
     std::string line;
@@ -29,6 +32,8 @@ const int LineCounter(){
 };
 
 void MakeTxtFile() {
+
+    //generator random counts for txt file and writin it in
 
     srand(std::time(NULL));
 
@@ -67,6 +72,8 @@ void lab_2() {
 
     in.open("state.txt");
 
+    //reading data from txt file and writing it in trails
+
     if (in.is_open()) {
         for (int i = 0; i < LCount; i++) {
             in >> Trails[i].TrainNum;
@@ -75,6 +82,8 @@ void lab_2() {
             in >> Trails[i].TravelTime;
             in >> Trails[i].ValidSeats;
         }
+
+        //cout data on the screen from the trails
 
         for (int i = 0; i < LCount; i++) {             
             std::cout << Trails[i].TrainNum << ' ';
@@ -93,6 +102,8 @@ void lab_2() {
 
     out.open("Trails.dat", std::ios::binary | std::ios::out);
 
+    //writing data from the trail in the bin file
+
     if (out.is_open()) {
         out.write((char*)Trails, sizeof(TrailConfig)*LCount);
 
@@ -110,6 +121,8 @@ void lab_2() {
 
     in.open("Trails.dat", std::ios::binary | std::ios::in);
 
+    //reading data from the bin file in trails_new
+
     if (in.is_open()) {
         in.read((char*)Trails_new, sizeof(TrailConfig) * LCount);
         std::cout << "Reading is done" << std::endl;
@@ -120,6 +133,8 @@ void lab_2() {
 
     in.close();
 
+    //writing on the screen trails_new data
+
     for (int i = 0; i < LCount; i++) {
         std::cout << Trails_new[i].TrainNum << ' ';
         std::cout << Trails_new[i].DestinationCity << ' ';
@@ -127,6 +142,8 @@ void lab_2() {
         std::cout << Trails_new[i].TravelTime << ' ';
         std::cout << Trails_new[i].ValidSeats << std::endl;
     }
+
+    //sort trails_new data
 
     int min;
     int indx;
@@ -148,6 +165,8 @@ void lab_2() {
     }
 
     std::cout << "Sort is done" << std::endl;
+
+    //cout data from the trails_new
 
     for (int i = 0; i < LCount; i++) {
         std::cout << Trails_new[i].TrainNum << ' ';
